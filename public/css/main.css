@@ -6,12 +6,14 @@ body {
 
 .grid-container {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
 .grid-container .col {
   background-color: #A09f9f;
-  border-radius: 5%;
+  border-radius: 0%;
   margin: 10px;
+  float: left;
 }
 
 .row-1 {
@@ -46,5 +48,38 @@ h2 {
 
 .bar .col {
   display: block;
-  border-radius: 5%;
+  border-radius: 0%;
+}
+
+#problem {
+  padding-left: 10px;
+  display: block ruby;
+}
+
+#chat {
+  display: inline;
+}
+
+#chat-messages {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.message {
+  border-radius: 25%;
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+  clear: both;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.msg-user {
+  float: right;
+  background-color: lightblue;
+}
+
+.msg-computer {
+  float: left;
+  background-color: green;
 }/*# sourceMappingURL=main.css.map */
