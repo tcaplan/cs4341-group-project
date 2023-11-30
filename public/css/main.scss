@@ -5,27 +5,42 @@ $user-message: lightblue;
 $computer-message: green;
 $radius: 0%;
 $message-radius: 25%;
+$height: 85%;
 
-body {
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body, main {
     background-color: $background-color;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
     margin: 0 0 0 0;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns:  repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-rows: min-content;
+    overflow: hidden;
+    height: $height;
 }
 
 .grid-container .col {
     background-color: $column-background-color;
     border-radius: $radius;
     margin: 10px;
-    float: left;
 }
 
 .row-1 {
     grid-row: 1 / 2;
+}
+
+.row-rest {
+    height: $height;
+    margin-bottom: 500px;
 }
 
 .col-1 {
@@ -66,11 +81,29 @@ h2 {
 
 #chat {
     display: inline;
+    overflow: hidden;
+}
+
+#chat-body {
+    position: relative;
+    height: $height;
+}
+
+.top {
+    height: 100%;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0px;
 }
 
 #chat-messages {
     padding-top: 5px;
     padding-bottom: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .message {
@@ -78,7 +111,8 @@ h2 {
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
     clear: both;
-    width: max-content;
+    inline-size: auto;
+    overflow-wrap:break-word;
 }
 
 .msg-user {
@@ -90,3 +124,23 @@ h2 {
     float: left;
     background-color: $computer-message;
 }
+
+#user-input {
+    vertical-align: bottom;
+    background-color: $border-color;
+    width: 100%;
+    display: flex;
+    
+    & button {
+        float: right;
+    }
+
+    & #user-input-field {
+        flex-grow: 1;
+    }
+}
+
+canvas {
+    background-color: black;
+    display: block;
+  }

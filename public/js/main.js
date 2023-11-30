@@ -1,4 +1,3 @@
-
 function setProblemMessage(msg) {
     element = document.getElementById("problem-message");
     element.innerHTML = msg;
@@ -28,9 +27,28 @@ function sendComputerMessage(msg) {
     chat.appendChild(element)
 }
 
-window.onload = function () {
+window.onload = async function () {
     setProblemMessage("testing 1 2");
-    sendUserMessage("testing 1 2");
-    sendComputerMessage("another test");
-    sendComputerMessage("testing a really long messgae ksadjfladfjdskfladksfjkaddfjsldkfjldsfjfjd;cfidsjfidasjfadsfhadsafhdsfj");
+
+    const response = await fetch( '/messageLog', {
+        method:'GET',
+    })
+
+    const data = await response.json();
+
+    console.log(data)
+
+    for(i = 0; i < data.length; i++) {
+        if(data[i].type == 'user') {
+            sendUserMessage(data[i].message)
+        } else {
+            sendComputerMessage(data[i].message)
+        }
+    }
+
+    simulation();
+    
+    button = document.getElementById("user-input-button")
+    input = document.getElementById("user-input-field")
+    button.onclick = function() { sendUserMessage(input.value) }
 }
