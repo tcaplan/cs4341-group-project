@@ -11,7 +11,7 @@ messageLog = [];
 dotenv.config()
 
 function generateResponse(input) {
-    return "sending back:" + input;
+    return "sending back: " + input;
 }
 
 // express/cookie set up

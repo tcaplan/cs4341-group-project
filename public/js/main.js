@@ -28,7 +28,7 @@ function sendComputerMessage(msg) {
 }
 
 window.onload = async function () {
-    setProblemMessage("testing 1 2");
+    setProblemMessage("Drive the robot through the maze to the end.");
 
     const response = await fetch( '/messageLog', {
         method:'GET',
