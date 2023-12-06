@@ -2,8 +2,12 @@ const http = require( 'http' ),
       fs   = require( 'fs' ),
       express = require('express'),
       dotenv = require("dotenv"),
+      bodyParser = require("body-parser"),
+      {spawn} = require('child_process'),
       app = express()
-
+      
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 messageLog = [];
 
@@ -11,7 +15,28 @@ messageLog = [];
 dotenv.config()
 
 function generateResponse(input) {
-    return "sending back: " + input;
+
+    // Reading Python files
+    var dataToSend;
+    // spawn new child process to call the python script
+    const python = spawn('python3', ['public/scripts/parser.py', input]);
+
+    // collect data from script
+    python.stdout.on('data', function (data) {
+        dataToSend = data.toString();
+    });
+
+    python.stderr.on('data', data => {
+        console.error(`stderr: ${data}`);
+    });
+
+    // in close event we are sure that stream from child process is closed
+    python.on('exit', (code) => {
+        console.log(`child process exited with code ${code}, ${dataToSend}`);
+        // response.sendFile(`${__dirname}/public/index.html`);
+    }); 
+
+    return "sending back: " + dataToSend;
 }
 
 // express/cookie set up
@@ -41,7 +66,7 @@ app.post('/usermessage', async (request, response ) => {
     // response.json(JSON.stringify(messageLog))
     
     response.redirect('/index.html')
-  })
+})
 
 // set up the server
 app.listen(`${process.env.PORT}` || 3000)
