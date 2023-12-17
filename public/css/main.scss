@@ -3,6 +3,7 @@ $border-color: #585454;
 $column-background-color: #A09f9f;
 $user-message: lightblue;
 $computer-message: green;
+$code-color: rgb(255, 114, 114);
 $radius: 0%;
 $message-radius: 25%;
 $height: 85%;
@@ -125,6 +126,11 @@ h2 {
     float: left;
     background-color: $computer-message;
     margin-right: 25px;
+}
+
+.code-block {
+    float: left;
+    background-color: $code-color;
 }
 
 #user-input {

@@ -185,7 +185,14 @@ simulation = function(instructions) {
 
 	let grid = Grid.create(grid_x_size,grid_y_size);
 
+	grid.setVal(0,0,OBSTACLE);
+	grid.setVal(1,0,OBSTACLE);
 	grid.setVal(1,1,OBSTACLE);
+	grid.setVal(1,2,OBSTACLE);
+	grid.setVal(0,6,OBSTACLE);
+	grid.setVal(1,6,OBSTACLE);
+	grid.setVal(2,6,OBSTACLE);
+
 	grid.setVal(9,9,GOAL);
 	// grid.setVal(0,3,PATH);
 	grid.setVal(robot.position.getX(),robot.position.getY(),ROBOT);

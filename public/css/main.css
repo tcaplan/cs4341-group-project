@@ -105,6 +105,14 @@ h2 {
   overflow-wrap: break-word;
 }
 
+.block {
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+  clear: both;
+  inline-size: auto;
+  overflow-wrap: break-word;
+}
+
 .msg-user {
   float: right;
   background-color: lightblue;
@@ -115,6 +123,11 @@ h2 {
   float: left;
   background-color: green;
   margin-right: 25px;
+}
+
+.code-block {
+  float: left;
+  background-color: rgb(255, 114, 114);
 }
 
 #user-input {
