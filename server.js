@@ -1,5 +1,3 @@
-const { resolve } = require('path');
-
 const http = require( 'http' ),
       fs   = require( 'fs' ),
       express = require('express'),
@@ -16,39 +14,29 @@ messageLog = [];
 // allows use of environment variables
 dotenv.config()
 
-async function generateResponse(input) {
+function generateResponse(input) {
 
     // Reading Python files
+    var dataToSend;
     // spawn new child process to call the python script
-    
-    const getPythonScriptStdout = (pythonScriptPath) => {
-        const python = spawn('python3', [pythonScriptPath, input]);
+    const python = spawn('python3', ['public/scripts/parser.py', input]);
 
-        return new Promise((resolve, reject) => {
-            // collect data from script
-            let dataToSend = ""
-
-            python.stdout.on('data', function (data) {
-                dataToSend += data.toString();
-            });
-
-            python.on('close', () => {
-                resolve(dataToSend)
-            }); 
-
-            python.stderr.on('error', err => {
-                resolve(err)
-            });
-        })
-    }
-
-    output = await getPythonScriptStdout('public/scripts/chat_gpt.py').then((output) => {
-        return output;
+    // collect data from script
+    python.stdout.on('data', function (data) {
+        dataToSend = data.toString();
     });
 
-    console.log("got from chat:", output)
+    python.stderr.on('data', data => {
+        console.error(`stderr: ${data}`);
+    });
 
-    return output
+    // in close event we are sure that stream from child process is closed
+    python.on('exit', (code) => {
+        console.log(`child process exited with code ${code}, ${dataToSend}`);
+        // response.sendFile(`${__dirname}/public/index.html`);
+    }); 
+
+    return "sending back: " + dataToSend;
 }
 
 // express/cookie set up
@@ -71,9 +59,11 @@ app.post('/usermessage', async (request, response ) => {
     
     messageLog.push({type: 'user', message: request.body.input})
 
-    computerMessage = await generateResponse(request.body.input);
+    computerMessage = generateResponse(request.body.input);
 
     messageLog.push({type: 'computer', message: computerMessage})
+
+    // response.json(JSON.stringify(messageLog))
     
     response.redirect('/index.html')
 })

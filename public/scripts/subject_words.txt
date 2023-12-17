@@ -1,2 +1,0 @@
-robot|Yes
-Thing|No|Not specific enough, specify robot
