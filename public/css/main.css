@@ -98,7 +98,6 @@ h2 {
 }
 
 .message {
-  border-radius: 25%;
   margin: 5px 5px 5px 5px;
   padding: 5px 5px 5px 5px;
   clear: both;
@@ -109,11 +108,13 @@ h2 {
 .msg-user {
   float: right;
   background-color: lightblue;
+  margin-left: 25px;
 }
 
 .msg-computer {
   float: left;
   background-color: green;
+  margin-right: 25px;
 }
 
 #user-input {

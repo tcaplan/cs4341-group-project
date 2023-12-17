@@ -107,7 +107,7 @@ h2 {
 }
 
 .message {
-    border-radius: $message-radius;
+    // border-radius: $message-radius;
     margin: 5px 5px 5px 5px;
     padding: 5px 5px 5px 5px;
     clear: both;
@@ -118,11 +118,13 @@ h2 {
 .msg-user {
     float: right;
     background-color: $user-message;
+    margin-left: 25px;
 }
 
 .msg-computer {
     float: left;
     background-color: $computer-message;
+    margin-right: 25px;
 }
 
 #user-input {
