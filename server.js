@@ -42,9 +42,11 @@ async function generateResponse(input) {
         })
     }
 
-    output = await getPythonScriptStdout('public/scripts/parser.py').then((output) => {
+    output = await getPythonScriptStdout('public/scripts/chat_gpt.py').then((output) => {
         return output;
     });
+
+    console.log("got from chat:", output)
 
     return output
 }
