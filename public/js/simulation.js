@@ -152,7 +152,7 @@ var Grid = {
 
 simulation = function(instructions) {
 
-    const canvas = document.getElementById('canvas');
+	const canvas = document.getElementById('canvas');
     const width = canvas.width = document.getElementById("simulation-space").offsetWidth
     const height = canvas.height = document.getElementById('simulation').offsetHeight-document.getElementsByClassName("bar")[1].offsetHeight
     const ctx = canvas.getContext('2d');
@@ -210,7 +210,7 @@ simulation = function(instructions) {
 	function renderStep(){
 		
 		// render();
-		if(instruction !== "END"){
+		if(instruction !== "END" && index < instructions.length-1){
 			if(Math.floor((performance.now() - startTime) / 750) > index){
 
 				if(instruction === "FORWARD") {
@@ -230,6 +230,7 @@ simulation = function(instructions) {
 				
 				index += 1;
 				instruction = instructions[index];
+				console.log("next instruction" + index + ": " + instructions[i])
 			}
 			// render
 			ctx.fillStyle = empty_color

@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+// const { resolve } = require('path');
 
 const http = require( 'http' ),
       fs   = require( 'fs' ),
@@ -79,4 +79,4 @@ app.post('/usermessage', async (request, response ) => {
 })
 
 // set up the server
-app.listen(4000)
+app.listen(`${process.env.PORT}` || 3000)
